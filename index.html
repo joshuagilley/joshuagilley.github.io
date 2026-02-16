@@ -263,26 +263,29 @@ transition: opacity 0.3s;
                     </div>
 
                     <ul class="group/list">
-                        <!-- Project 1: MailGraph -->
+                        <!-- Project 1: Load Agent (Bear Cognition) -->
                         <li class="mb-12">
                             <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
                                 <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg border border-transparent transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:border-zinc-800 lg:group-hover:bg-zinc-900/30"></div>
                                 <div class="z-10 sm:order-2 sm:col-span-6">
                                     <h3>
-                                        <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base">MailGraph</span>
+                                        <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base">Load Agent</span>
                                     </h3>
                                     <p class="mt-2 text-sm leading-normal">
-                                        An Outlook add-in that acts as a webhook: it scrapes data from incoming emails, runs it through a LangGraph model for processing, and stores the structured results in MongoDB. The add-in then consumes this data to surface insights and actions directly in Outlook.
+                                        At <span class="font-medium text-white">Bear Cognition</span>, I built Load Agent to help shippers and 3PLs win bids. In 3PL (Third-Party Logistics), bids are competitive proposals (RFPs/RFQs) where providers submit pricing, capacity, and service levels for transportation or warehouse fulfillment—covering everything from spot rates and mini-bids to annual contracts. Load Agent gives users clear visibility into shipments and offers so they can confidently place and win those bids.
+                                    </p>
+                                    <p class="mt-2 text-sm leading-normal">
+                                        Users send an email to a webhook address; the payload is processed and stored in MongoDB. When they open the Outlook add-in, the load details load from that data. They call an API to retrieve offers, select one, then book the shipment and send BOLs (Bills of Lading)—all without leaving Outlook.
                                     </p>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
-                                        <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">Outlook Add-in</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">LangGraph</div></li>
+                                        <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">React</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">MongoDB</div></li>
                                     </ul>
                                 </div>
                                 <div class="z-10 sm:order-1 sm:col-span-2">
                                     <div class="aspect-video w-32 sm:w-full rounded border-2 border-zinc-800 bg-zinc-900 transition group-hover:border-zinc-700 sm:order-1 sm:col-span-2 sm:translate-y-1 flex items-center justify-center text-zinc-500 group-hover:text-indigo-400">
-                                        <span class="iconify" data-icon="lucide:mail" data-width="24" stroke-width="1.5"></span>
+                                        <span class="iconify" data-icon="lucide:package" data-width="24" stroke-width="1.5"></span>
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +300,13 @@ transition: opacity 0.3s;
                                         <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base">Apollo Data &amp; Findings API</span>
                                     </h3>
                                     <p class="mt-2 text-sm leading-normal">
-                                        Led end-to-end development of RESTful API serving 20,000+ study directors with real-time access to clinical study data.
+                                        At <span class="font-medium text-white">Charles River Laboratories</span>, I led the end-to-end development of the <span class="font-medium text-white">Apollo Data &amp; Findings API</span>, a Node.js-based REST platform that delivered real-time clinical study data to more than 20,000 study directors and clinical pathologists. Apollo centralized complex research data and made it immediately actionable for teams monitoring animal health and study outcomes.
+                                    </p>
+                                    <p class="mt-2 text-sm leading-normal">
+                                        The platform tracked the full lifecycle of preclinical studies—daily food consumption, weight trends, clinical observations, dosing schedules, and overall health indicators. Accuracy and speed were critical: pathologists relied on this data to detect anomalies early and make decisions that could impact study timelines and research integrity.
+                                    </p>
+                                    <p class="mt-2 text-sm leading-normal">
+                                        On the backend, we structured the service layer to aggregate and normalize data before it reached the client, so responses were shaped for direct use in frontend components. That minimized client-side processing and rendering overhead and gave frontend teams a predictable interface for data-heavy dashboards. We focused on query performance, payload design, and service boundaries to support high-throughput access without sacrificing reliability. By treating the API as a product, we enabled research teams to move faster while staying confident in the underlying data.
                                     </p>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">RESTful API</div></li>
@@ -394,10 +403,7 @@ transition: opacity 0.3s;
                 <section class="mb-16 md:mb-24 lg:mb-36">
                     <h2 class="text-sm font-bold uppercase tracking-widest text-zinc-200 mb-8">Certifications</h2>
                     <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900 border border-zinc-800 px-4 py-3 text-sm font-medium text-zinc-300 group hover:border-indigo-500/30 transition-colors">
-                            <span class="iconify text-indigo-400" data-icon="lucide:award" data-width="20" stroke-width="1.5"></span>
-                            AWS Cloud Foundational
-                        </div>
+
                         <div class="flex items-center gap-3 rounded-md bg-zinc-900 border border-zinc-800 px-4 py-3 text-sm font-medium text-zinc-300 group hover:border-indigo-500/30 transition-colors">
                             <span class="iconify text-indigo-400" data-icon="lucide:award" data-width="20" stroke-width="1.5"></span>
                             AWS Cloud Practitioner
