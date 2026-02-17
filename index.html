@@ -40,6 +40,11 @@ background: #3f3f46;
 .project-details[open] summary .project-chevron { transform: rotate(180deg); }
 .project-details .project-chevron { display: inline-block; transition: transform 0.2s ease; }
 
+/* Blog filter pills */
+.blog-pill { transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
+.blog-pill.active { background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.4); color: rgb(165 180 252); }
+.blog-item-hidden-by-tag { display: none !important; }
+
 /* Spotlight Effect Logic - Adjusted for Indigo */
 .spotlight {
 background: radial-gradient(600px circle at var(--x) var(--y), rgba(99, 102, 241, 0.10), transparent 80%);
@@ -106,6 +111,14 @@ transition: opacity 0.3s;
                                         <span class="iconify" data-icon="lucide:chevron-right" data-width="16"></span>
                                     </span>
                                     <span class="nav-text text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white group-focus-visible:text-white transition-colors">Projects</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="group flex items-center py-3" href="#blog">
+                                    <span class="nav-indicator mr-2 flex items-center justify-center text-transparent transition-all group-hover:text-indigo-400 motion-reduce:transition-none">
+                                        <span class="iconify" data-icon="lucide:chevron-right" data-width="16"></span>
+                                    </span>
+                                    <span class="nav-text text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white group-focus-visible:text-white transition-colors">Blog</span>
                                 </a>
                             </li>
                         </ul>
@@ -447,6 +460,145 @@ transition: opacity 0.3s;
                     </ul>
                 </section>
 
+                <!-- Blog Section -->
+                <section id="blog" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Blog">
+                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-zinc-950/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-zinc-200 lg:sr-only">Blog</h2>
+                    </div>
+
+                    <div id="blog-pills" class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter posts by tag">
+                        <button type="button" class="blog-pill active rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="all" role="tab" aria-selected="true">All</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="api" role="tab" aria-selected="false">API</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="architecture" role="tab" aria-selected="false">Architecture</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="outlook" role="tab" aria-selected="false">Outlook</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="product" role="tab" aria-selected="false">Product</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="debugging" role="tab" aria-selected="false">Debugging</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="mongodb" role="tab" aria-selected="false">MongoDB</button>
+                    </div>
+
+                    <ul id="blog-list" class="space-y-8">
+                        <li class="blog-item" data-tags="api architecture">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        Building APIs that scale
+                                    </h3>
+                                    <p class="mt-1 text-sm text-zinc-500">A short intro or date can go here.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">API</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+                            </details>
+                        </li>
+                        <li class="blog-item" data-tags="outlook product">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        Lessons from shipping an Outlook add-in
+                                    </h3>
+                                    <p class="mt-1 text-sm text-zinc-500">Another placeholder subtitle or date.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Outlook</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Product</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                                    <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
+                                </div>
+                            </details>
+                        </li>
+                        <li class="blog-item" data-tags="architecture">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        Why I care about clean architecture
+                                    </h3>
+                                    <p class="mt-1 text-sm text-zinc-500">One more dummy subtitle.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                                </div>
+                            </details>
+                        </li>
+                        <!-- More blogs (hidden until "Show more" is clicked) -->
+                        <li id="blog-more-1" class="blog-item blog-item-more hidden" data-tags="debugging product">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        Debugging production without the panic
+                                    </h3>
+                                    <p class="mt-1 text-sm text-zinc-500">Placeholder subtitle.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Debugging</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Product</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                </div>
+                            </details>
+                        </li>
+                        <li id="blog-more-2" class="blog-item blog-item-more hidden" data-tags="mongodb architecture">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        MongoDB and durable workflows
+                                    </h3>
+                                    <p class="mt-1 text-sm text-zinc-500">Another placeholder.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">MongoDB</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                    <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
+                                </div>
+                            </details>
+                        </li>
+                        <li id="blog-more-3" class="blog-item blog-item-more hidden" data-tags="architecture">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        From monolith to modular
+                                    </h3>
+                                    <p class="mt-1 text-sm text-zinc-500">One more placeholder.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+                            </details>
+                        </li>
+                    </ul>
+                    <div id="blog-show-more-wrap" class="mt-8">
+                        <button type="button" id="blog-show-more" class="inline-flex items-center font-medium leading-tight text-zinc-400 hover:text-indigo-400 transition-colors text-sm group" aria-expanded="false" aria-controls="blog-more-1 blog-more-2 blog-more-3">
+                            <span id="blog-show-more-text">Show more</span>
+                            <span class="iconify ml-1 transition-transform group-hover:translate-x-0.5" data-icon="lucide:arrow-right" data-width="16" stroke-width="1.5"></span>
+                        </button>
+                    </div>
+                </section>
+
                 <!-- Certifications (Badge Style) -->
                 <section class="mb-16 md:mb-24 lg:mb-36">
                     <h2 class="text-sm font-bold uppercase tracking-widest text-zinc-200 mb-8">Certifications</h2>
@@ -538,6 +690,82 @@ transition: opacity 0.3s;
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // Blog "Show more" toggle + tag filter
+        const blogShowMoreBtn = document.getElementById('blog-show-more');
+        const blogShowMoreText = document.getElementById('blog-show-more-text');
+        const blogShowMoreWrap = document.getElementById('blog-show-more-wrap');
+        const blogMoreItems = document.querySelectorAll('.blog-item-more');
+        const blogItems = document.querySelectorAll('.blog-item');
+        const blogPills = document.querySelectorAll('.blog-pill');
+
+        function getMatchingBlogItems() {
+            return [...blogItems].filter(el => !el.classList.contains('blog-item-hidden-by-tag'));
+        }
+
+        function getExpandableItems() {
+            const activePill = document.querySelector('.blog-pill.active');
+            const tag = activePill ? activePill.getAttribute('data-tag-filter') : 'all';
+            if (tag === 'all') {
+                return [...blogMoreItems];
+            }
+            const matching = getMatchingBlogItems();
+            return matching.slice(3);
+        }
+
+        if (blogShowMoreBtn) {
+            blogShowMoreBtn.addEventListener('click', () => {
+                const isExpanded = blogShowMoreBtn.getAttribute('aria-expanded') === 'true';
+                const expandable = getExpandableItems();
+                expandable.forEach(el => {
+                    el.classList.toggle('hidden', isExpanded);
+                });
+                blogShowMoreBtn.setAttribute('aria-expanded', !isExpanded);
+                blogShowMoreText.textContent = isExpanded ? 'Show more' : 'Show less';
+            });
+        }
+
+        if (blogPills.length && blogItems.length) {
+            blogPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const tag = pill.getAttribute('data-tag-filter');
+                    blogPills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected', 'false'); });
+                    pill.classList.add('active');
+                    pill.setAttribute('aria-selected', 'true');
+
+                    if (tag === 'all') {
+                        blogItems.forEach(item => {
+                            item.classList.remove('blog-item-hidden-by-tag');
+                            if (item.classList.contains('blog-item-more')) item.classList.add('hidden');
+                        });
+                        if (blogShowMoreWrap) blogShowMoreWrap.style.display = '';
+                        if (blogShowMoreBtn) {
+                            blogShowMoreBtn.setAttribute('aria-expanded', 'false');
+                            if (blogShowMoreText) blogShowMoreText.textContent = 'Show more';
+                        }
+                    } else {
+                        blogItems.forEach(item => {
+                            const itemTags = (item.getAttribute('data-tags') || '').split(/\s+/);
+                            if (itemTags.includes(tag)) {
+                                item.classList.remove('blog-item-hidden-by-tag');
+                            } else {
+                                item.classList.add('blog-item-hidden-by-tag');
+                            }
+                        });
+                        const matching = getMatchingBlogItems();
+                        matching.forEach((item, i) => {
+                            if (i < 3) item.classList.remove('hidden');
+                            else item.classList.add('hidden');
+                        });
+                        if (blogShowMoreWrap) blogShowMoreWrap.style.display = matching.length > 3 ? '' : 'none';
+                        if (blogShowMoreBtn) {
+                            blogShowMoreBtn.setAttribute('aria-expanded', 'false');
+                            if (blogShowMoreText) blogShowMoreText.textContent = 'Show more';
+                        }
+                    }
+                });
+            });
+        }
     </script>
 
 </body></html>
