@@ -22,6 +22,24 @@ border-radius: 3px;
 ::-webkit-scrollbar-thumb:hover {
 background: #3f3f46;
 }
+/* Project "See more" dropdown */
+.project-details summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgb(161 161 170);
+    transition: color 0.15s;
+}
+.project-details summary::-webkit-details-marker { display: none; }
+.project-details summary:hover { color: rgb(165 180 252); }
+.project-details[open] summary .project-chevron { transform: rotate(180deg); }
+.project-details .project-chevron { display: inline-block; transition: transform 0.2s ease; }
+
 /* Spotlight Effect Logic - Adjusted for Indigo */
 .spotlight {
 background: radial-gradient(600px circle at var(--x) var(--y), rgba(99, 102, 241, 0.10), transparent 80%);
@@ -274,9 +292,15 @@ transition: opacity 0.3s;
                                     <p class="mt-2 text-sm leading-normal">
                                         At <span class="font-medium text-white">Bear Cognition</span>, I built Load Agent to help shippers and 3PLs win bids. In 3PL (Third-Party Logistics), bids are competitive proposals (RFPs/RFQs) where providers submit pricing, capacity, and service levels for transportation or warehouse fulfillment—covering everything from spot rates and mini-bids to annual contracts. Load Agent gives users clear visibility into shipments and offers so they can confidently place and win those bids.
                                     </p>
-                                    <p class="mt-2 text-sm leading-normal">
-                                        Users send an email to a webhook address; the payload is processed and stored in MongoDB. When they open the Outlook add-in, the load details load from that data. They call an API to retrieve offers, select one, then book the shipment and send BOLs (Bills of Lading)—all without leaving Outlook.
-                                    </p>
+                                    <details class="project-details mt-1">
+                                        <summary>
+                                            <span class="project-chevron"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            See more
+                                        </summary>
+                                        <p class="mt-2 text-sm leading-normal pl-5">
+                                            Users send an email to a webhook address; the payload is processed and stored in MongoDB. When they open the Outlook add-in, the load details load from that data. They call an API to retrieve offers, select one, then book the shipment and send BOLs (Bills of Lading)—all without leaving Outlook.
+                                        </p>
+                                    </details>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">LangGraph</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">React</div></li>
@@ -302,12 +326,18 @@ transition: opacity 0.3s;
                                     <p class="mt-2 text-sm leading-normal">
                                         At <span class="font-medium text-white">Charles River Laboratories</span>, I led the end-to-end development of the <span class="font-medium text-white">Apollo Data &amp; Findings API</span>, a Node.js-based REST platform that delivered real-time clinical study data to more than 20,000 study directors and clinical pathologists. Apollo centralized complex research data and made it immediately actionable for teams monitoring animal health and study outcomes.
                                     </p>
-                                    <p class="mt-2 text-sm leading-normal">
-                                        The platform tracked the full lifecycle of preclinical studies—daily food consumption, weight trends, clinical observations, dosing schedules, and overall health indicators. Accuracy and speed were critical: pathologists relied on this data to detect anomalies early and make decisions that could impact study timelines and research integrity.
-                                    </p>
-                                    <p class="mt-2 text-sm leading-normal">
-                                        On the backend, we structured the service layer to aggregate and normalize data before it reached the client, so responses were shaped for direct use in frontend components. That minimized client-side processing and rendering overhead and gave frontend teams a predictable interface for data-heavy dashboards. We focused on query performance, payload design, and service boundaries to support high-throughput access without sacrificing reliability. By treating the API as a product, we enabled research teams to move faster while staying confident in the underlying data.
-                                    </p>
+                                    <details class="project-details mt-1">
+                                        <summary>
+                                            <span class="project-chevron"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            See more
+                                        </summary>
+                                        <p class="mt-2 text-sm leading-normal pl-5">
+                                            The platform tracked the full lifecycle of preclinical studies—daily food consumption, weight trends, clinical observations, dosing schedules, and overall health indicators. Accuracy and speed were critical: pathologists relied on this data to detect anomalies early and make decisions that could impact study timelines and research integrity.
+                                        </p>
+                                        <p class="mt-2 text-sm leading-normal pl-5">
+                                            On the backend, we structured the service layer to aggregate and normalize data before it reached the client, so responses were shaped for direct use in frontend components. That minimized client-side processing and rendering overhead and gave frontend teams a predictable interface for data-heavy dashboards. We focused on query performance, payload design, and service boundaries to support high-throughput access without sacrificing reliability. By treating the API as a product, we enabled research teams to move faster while staying confident in the underlying data.
+                                        </p>
+                                    </details>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">RESTful API</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">Clinical Data</div></li>
@@ -330,9 +360,15 @@ transition: opacity 0.3s;
                                     <h3>
                                         <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base">Inventory Logistics App</span>
                                     </h3>
-                                    <p class="mt-2 text-sm leading-normal">
-                                        Serverless React application optimizing inventory logistics with real-time tracking capabilities. Reduced annual product loss by $200,000.
-                                    </p>
+                                    <details class="project-details mt-1">
+                                        <summary>
+                                            <span class="project-chevron"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            See more
+                                        </summary>
+                                        <p class="mt-2 text-sm leading-normal pl-5">
+                                            Serverless React application optimizing inventory logistics with real-time tracking capabilities. Reduced annual product loss by $200,000.
+                                        </p>
+                                    </details>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">React</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">Serverless</div></li>
@@ -355,9 +391,15 @@ transition: opacity 0.3s;
                                     <h3>
                                         <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base">MARS Mapmaker</span>
                                     </h3>
-                                    <p class="mt-2 text-sm leading-normal">
-                                        React-based CSV mapping tool for geochronological data processing, automating thousands of data lines. Used by Columbia University researchers.
-                                    </p>
+                                    <details class="project-details mt-1">
+                                        <summary>
+                                            <span class="project-chevron"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            See more
+                                        </summary>
+                                        <p class="mt-2 text-sm leading-normal pl-5">
+                                            React-based CSV mapping tool for geochronological data processing, automating thousands of data lines. Used by Columbia University researchers.
+                                        </p>
+                                    </details>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">React</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">CSV Processing</div></li>
@@ -379,9 +421,15 @@ transition: opacity 0.3s;
                                     <h3>
                                         <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base">Twilio + Teams Integration</span>
                                     </h3>
-                                    <p class="mt-2 text-sm leading-normal">
-                                        Cloud application integrating Twilio SMS with Microsoft Teams for seamless communication across 500+ employees.
-                                    </p>
+                                    <details class="project-details mt-1">
+                                        <summary>
+                                            <span class="project-chevron"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            See more
+                                        </summary>
+                                        <p class="mt-2 text-sm leading-normal pl-5">
+                                            Cloud application integrating Twilio SMS with Microsoft Teams for seamless communication across 500+ employees.
+                                        </p>
+                                    </details>
                                     <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">Twilio</div></li>
                                         <li class="mr-1.5 mt-2"><div class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors">Microsoft Teams</div></li>
