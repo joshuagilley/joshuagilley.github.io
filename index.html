@@ -69,23 +69,13 @@ transition: opacity 0.3s;
             <!-- Left Column: Header / Nav -->
             <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
                 <div>
+                    <img src="images/portrait.png" alt="Joshua Gilley" class="mb-6 w-36 h-36 sm:w-44 sm:h-44 rounded-lg object-cover object-top grayscale" />
                     <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                         <a href="/">Joshua Gilley</a>
                     </h1>
                     <h2 class="mt-3 text-lg font-medium tracking-tight text-zinc-200 sm:text-xl">
                         Software Engineer
                     </h2>
-                    <p class="mt-4 max-w-xs leading-normal text-zinc-400">
-                        I build scalable, user-focused applications in health tech and logistics environments. Passionate about creating software that makes a meaningful impact.
-                    </p>
-                    
-                    <div class="mt-6 flex flex-wrap gap-3 text-xs font-mono text-zinc-500">
-                        <span class="rounded border border-zinc-800 bg-zinc-900 px-2 py-1 text-zinc-300">React</span>
-                        <span class="rounded border border-zinc-800 bg-zinc-900 px-2 py-1 text-zinc-300">TypeScript</span>
-                        <span class="rounded border border-zinc-800 bg-zinc-900 px-2 py-1 text-zinc-300">Node.js</span>
-                        <span class="rounded border border-zinc-800 bg-zinc-900 px-2 py-1 text-zinc-300">Python</span>
-                    </div>
-
                     <!-- Navigation -->
                     <nav class="nav hidden lg:block" aria-label="In-page jump links">
                         <ul class="mt-16 w-max">
@@ -466,6 +456,11 @@ transition: opacity 0.3s;
                         <h2 class="text-sm font-bold uppercase tracking-widest text-zinc-200 lg:sr-only">Blog</h2>
                     </div>
 
+                    <div class="rounded-lg border border-zinc-800 bg-zinc-900/50 px-5 py-4 mb-8 text-sm text-zinc-400 leading-relaxed">
+                        <p>This blog is where I learn in public. I like going deep on stuff: architecture, shipping product, the messy parts of building software. If I figure something out, I try to write it up so it might help someone else too.</p>
+                        <p class="mt-3">I'm also trying to write every post without AI. No drafting or polishing by a model. It's slower and kinda hard, but it makes me think things through and actually own what I'm putting out there.</p>
+                    </div>
+
                     <div id="blog-pills" class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter posts by tag">
                         <button type="button" class="blog-pill active rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="all" role="tab" aria-selected="true">All</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="api" role="tab" aria-selected="false">API</button>
@@ -474,10 +469,11 @@ transition: opacity 0.3s;
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="product" role="tab" aria-selected="false">Product</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="debugging" role="tab" aria-selected="false">Debugging</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="mongodb" role="tab" aria-selected="false">MongoDB</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="test" role="tab" aria-selected="false">Test</button>
                     </div>
 
                     <ul id="blog-list" class="space-y-8">
-                        <li class="blog-item" data-tags="api architecture">
+                        <li class="blog-item" data-tags="test api architecture">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
                                     <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
@@ -486,6 +482,7 @@ transition: opacity 0.3s;
                                     </h3>
                                     <p class="mt-1 text-sm text-zinc-500">A short intro or date can go here.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">API</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
                                     </div>
@@ -496,7 +493,7 @@ transition: opacity 0.3s;
                                 </div>
                             </details>
                         </li>
-                        <li class="blog-item" data-tags="outlook product">
+                        <li class="blog-item" data-tags="test outlook product">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
                                     <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
@@ -505,6 +502,7 @@ transition: opacity 0.3s;
                                     </h3>
                                     <p class="mt-1 text-sm text-zinc-500">Another placeholder subtitle or date.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Outlook</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Product</span>
                                     </div>
@@ -515,7 +513,7 @@ transition: opacity 0.3s;
                                 </div>
                             </details>
                         </li>
-                        <li class="blog-item" data-tags="architecture">
+                        <li class="blog-item" data-tags="test architecture">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
                                     <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
@@ -524,6 +522,7 @@ transition: opacity 0.3s;
                                     </h3>
                                     <p class="mt-1 text-sm text-zinc-500">One more dummy subtitle.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
                                     </div>
                                 </summary>
@@ -534,7 +533,7 @@ transition: opacity 0.3s;
                             </details>
                         </li>
                         <!-- More blogs (hidden until "Show more" is clicked) -->
-                        <li id="blog-more-1" class="blog-item blog-item-more hidden" data-tags="debugging product">
+                        <li id="blog-more-1" class="blog-item blog-item-more hidden" data-tags="test debugging product">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
                                     <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
@@ -543,6 +542,7 @@ transition: opacity 0.3s;
                                     </h3>
                                     <p class="mt-1 text-sm text-zinc-500">Placeholder subtitle.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Debugging</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Product</span>
                                     </div>
@@ -553,7 +553,7 @@ transition: opacity 0.3s;
                                 </div>
                             </details>
                         </li>
-                        <li id="blog-more-2" class="blog-item blog-item-more hidden" data-tags="mongodb architecture">
+                        <li id="blog-more-2" class="blog-item blog-item-more hidden" data-tags="test mongodb architecture">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
                                     <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
@@ -562,6 +562,7 @@ transition: opacity 0.3s;
                                     </h3>
                                     <p class="mt-1 text-sm text-zinc-500">Another placeholder.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">MongoDB</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
                                     </div>
@@ -572,7 +573,7 @@ transition: opacity 0.3s;
                                 </div>
                             </details>
                         </li>
-                        <li id="blog-more-3" class="blog-item blog-item-more hidden" data-tags="architecture">
+                        <li id="blog-more-3" class="blog-item blog-item-more hidden" data-tags="test architecture">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
                                     <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
@@ -581,6 +582,7 @@ transition: opacity 0.3s;
                                     </h3>
                                     <p class="mt-1 text-sm text-zinc-500">One more placeholder.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
                                     </div>
                                 </summary>
