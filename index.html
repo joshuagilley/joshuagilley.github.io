@@ -470,9 +470,33 @@ transition: opacity 0.3s;
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="debugging" role="tab" aria-selected="false">Debugging</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="mongodb" role="tab" aria-selected="false">MongoDB</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="test" role="tab" aria-selected="false">Test</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="error-handling" role="tab" aria-selected="false">Error Handling</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="reliability" role="tab" aria-selected="false">Reliability</button>
                     </div>
 
                     <ul id="blog-list" class="space-y-8">
+                        <li class="blog-item" data-tags="architecture error-handling reliability">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        System Reliability
+                                    </h3>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">Fault tolerance, user expectations, and handling failure in the Revenue Optimization System.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Error Handling</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Reliability</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>When contemplating reliability, I think of a few things: the application performance compared to what the user expects, tolerance of unexpected decisions by the user, and performance being good under expected load and data volume. Security matters too, but I think of it as a separate quality attribute from reliability.</p>
+                                    <p>When something goes wrong, the underlying cause is a fault, and what the user experiences is a failure. Fault-tolerant systems handle faults in an elegant way so the user can still make progress. To give an example of this, I'll use a project that I've worked on most recently. In our Revenue Optimization System at Bear Cognition, we gather rates from an API to display to the user. Before I ever dove into the codebase, I noticed that when you hit this API, if there was an issue the request would fail and return no rates. So the user was stuck with no way to move forward in the system. Even if one part of the request was imperfect, the entire workflow shut down.</p>
+                                    <p>To resolve this, I adjusted the model of the request to present safe default values that were required by the API, and I made sure those defaults were transparent to the user. I also added clarity about any issues by surfacing them in a modal explaining what happened and why. For example, if some of the shipments did produce offers from the API and others did not, the successful offers would still show and then you could hit continue.</p>
+                                    <p>This instantly made the system more reliable because it gave the user a way to continue progress through the revenue optimization system with full transparency as to what the API returned, even if they used it in an incorrect way or provided incomplete data in the request.</p>
+                                </div>
+                            </details>
+                        </li>
                         <li class="blog-item" data-tags="test api architecture">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
@@ -480,7 +504,7 @@ transition: opacity 0.3s;
                                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
                                         Building APIs that scale
                                     </h3>
-                                    <p class="mt-1 text-sm text-zinc-500">A short intro or date can go here.</p>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">A short intro or date can go here.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">API</span>
@@ -500,7 +524,7 @@ transition: opacity 0.3s;
                                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
                                         Lessons from shipping an Outlook add-in
                                     </h3>
-                                    <p class="mt-1 text-sm text-zinc-500">Another placeholder subtitle or date.</p>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">Another placeholder subtitle or date.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Outlook</span>
@@ -520,7 +544,7 @@ transition: opacity 0.3s;
                                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
                                         Why I care about clean architecture
                                     </h3>
-                                    <p class="mt-1 text-sm text-zinc-500">One more dummy subtitle.</p>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">One more dummy subtitle.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
@@ -540,7 +564,7 @@ transition: opacity 0.3s;
                                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
                                         Debugging production without the panic
                                     </h3>
-                                    <p class="mt-1 text-sm text-zinc-500">Placeholder subtitle.</p>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">Placeholder subtitle.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Debugging</span>
@@ -560,7 +584,7 @@ transition: opacity 0.3s;
                                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
                                         MongoDB and durable workflows
                                     </h3>
-                                    <p class="mt-1 text-sm text-zinc-500">Another placeholder.</p>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">Another placeholder.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">MongoDB</span>
@@ -580,7 +604,7 @@ transition: opacity 0.3s;
                                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
                                         From monolith to modular
                                     </h3>
-                                    <p class="mt-1 text-sm text-zinc-500">One more placeholder.</p>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">One more placeholder.</p>
                                     <div class="mt-2 flex flex-wrap gap-1.5">
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Test</span>
                                         <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
