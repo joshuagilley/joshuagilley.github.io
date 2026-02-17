@@ -111,6 +111,14 @@ transition: opacity 0.3s;
                                     <span class="nav-text text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white group-focus-visible:text-white transition-colors">Blog</span>
                                 </a>
                             </li>
+                            <li>
+                                <a class="group flex items-center py-3" href="#certifications">
+                                    <span class="nav-indicator mr-2 flex items-center justify-center text-transparent transition-all group-hover:text-indigo-400 motion-reduce:transition-none">
+                                        <span class="iconify" data-icon="lucide:chevron-right" data-width="16"></span>
+                                    </span>
+                                    <span class="nav-text text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white group-focus-visible:text-white transition-colors">Certifications</span>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -151,7 +159,7 @@ transition: opacity 0.3s;
                     </div>
                     <div class="text-base text-zinc-400 space-y-4">
                         <p>
-                            I'm a software engineer who cares deeply about well-designed systems, accessible pixel-perfect interfaces, and clean, maintainable architecture. I'm drawn to problems where thoughtful design and strong engineering intersect, building experiences that are performant, intuitive, and resilient.
+                            I'm a software engineer who cares deeply about well-designed systems, accessible pixel-perfect interfaces, and clean, maintainable architecture. I'm drawn to problems where thoughtful design and strong engineering intersect, building experiences that are performant, intuitive, and resilient. I've been in the industry for six years, mostly in full-stack engineering. My focus is shifting to AI systems engineering, working on the system front to back, from security and infrastructure to how AI fits into real workflows.
                         </p>
                         <p>
                             At <span class="font-medium text-white">Bear Cognition</span>, I develop data-driven logistics applications, including Outlook add-ins that provide clear visibility into shipments and offers so users can confidently place and win bids. My work spans React-based interfaces, LangGraph and Python pipelines for email processing, and MongoDB for durable data workflows.
@@ -626,42 +634,64 @@ transition: opacity 0.3s;
                 </section>
 
                 <!-- Certifications (Badge Style) -->
-                <section class="mb-16 md:mb-24 lg:mb-36">
+                <section id="certifications" class="mb-16 md:mb-24 lg:mb-36 scroll-mt-16 lg:scroll-mt-24" aria-label="Certifications">
                     <h2 class="text-sm font-bold uppercase tracking-widest text-zinc-200 mb-8">Certifications</h2>
-                    <div class="flex flex-wrap gap-4">
 
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900 border border-zinc-800 px-4 py-3 text-sm font-medium text-zinc-300 group hover:border-indigo-500/30 transition-colors">
-                            <span class="iconify text-indigo-400" data-icon="lucide:award" data-width="20" stroke-width="1.5"></span>
-                            AWS Cloud Practitioner
+                    <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-4">Earned</p>
+                    <div class="flex flex-wrap gap-6 mb-10">
+                        <a href="https://www.credly.com/badges/411298ac-04ad-46dd-bc92-9effaf78db57" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 group">
+                            <img src="images/certs/cloud_practitioner.png" alt="AWS Cloud Practitioner" class="w-[120px] h-[120px] object-contain rounded-lg border border-zinc-800 group-hover:border-indigo-500/40 transition-colors" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                            <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800 border border-zinc-700 items-center justify-center text-zinc-500 text-center text-xs">AWS Cloud Practitioner</span>
+                            <span class="text-sm font-medium text-zinc-300 group-hover:text-indigo-400 transition-colors text-center">AWS Cloud Practitioner</span>
+                        </a>
+                        <a href="https://www.credly.com/badges/c680ffb0-5ab6-4aaf-acf4-cce2b1e29ef3" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 group">
+                            <img src="images/certs/ai_practitioner.png" alt="AWS AI Practitioner" class="w-[120px] h-[120px] object-contain rounded-lg border border-zinc-800 group-hover:border-indigo-500/40 transition-colors" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                            <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800 border border-zinc-700 items-center justify-center text-zinc-500 text-center text-xs">AWS AI Practitioner</span>
+                            <span class="text-sm font-medium text-zinc-300 group-hover:text-indigo-400 transition-colors text-center">AWS AI Practitioner</span>
+                        </a>
+                    </div>
+
+                    <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-4">In progress &amp; planned</p>
+                    <div class="flex flex-wrap gap-6">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="relative pb-5">
+                                <img src="images/certs/solutions_architect_associate.png" alt="AWS Solutions Architect – Associate" class="w-[120px] h-[120px] object-contain rounded-lg border border-dashed border-amber-500/40 opacity-60 grayscale" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                                <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800/80 border border-dashed border-amber-500/40 items-center justify-center text-zinc-500 text-center text-xs">SAA</span>
+                                <span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 rounded bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400/90 whitespace-nowrap">In progress</span>
+                            </div>
+                            <span class="text-sm font-medium text-zinc-400 text-center max-w-[140px]">AWS Solutions Architect – Associate</span>
                         </div>
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900 border border-zinc-800 px-4 py-3 text-sm font-medium text-zinc-300 group hover:border-indigo-500/30 transition-colors">
-                            <span class="iconify text-indigo-400" data-icon="lucide:award" data-width="20" stroke-width="1.5"></span>
-                            AWS AI Practitioner
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="relative pb-5">
+                                <img src="images/certs/comptia_security.png" alt="CompTIA Security+" class="w-[120px] h-[120px] object-contain rounded-lg border border-dashed border-amber-500/40 opacity-60 grayscale" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                                <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800/80 border border-dashed border-amber-500/40 items-center justify-center text-zinc-500 text-center text-xs">Security+</span>
+                                <span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 rounded bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400/90 whitespace-nowrap">In progress</span>
+                            </div>
+                            <span class="text-sm font-medium text-zinc-400 text-center max-w-[140px]">CompTIA Security+</span>
                         </div>
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900/80 border border-dashed border-amber-500/40 px-4 py-3 text-sm font-medium text-zinc-400 group hover:border-amber-500/50 transition-colors">
-                            <span class="iconify text-amber-400/90" data-icon="lucide:clock" data-width="20" stroke-width="1.5"></span>
-                            <span>AWS Certified Solutions Architect – Associate</span>
-                            <span class="rounded bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400/90">In progress</span>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="relative pb-5">
+                                <img src="images/certs/machine_learning_associate.webp" alt="AWS ML Engineer – Associate" class="w-[120px] h-[120px] object-contain rounded-lg border border-dashed border-zinc-600 opacity-60 grayscale" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                                <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800/80 border border-dashed border-zinc-600 items-center justify-center text-zinc-500 text-center text-xs">MLA</span>
+                                <span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 rounded bg-zinc-700/50 px-2 py-0.5 text-xs font-medium text-zinc-400 whitespace-nowrap">After SAA</span>
+                            </div>
+                            <span class="text-sm font-medium text-zinc-500 text-center max-w-[140px]">AWS ML Engineer – Associate</span>
                         </div>
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900/80 border border-dashed border-amber-500/40 px-4 py-3 text-sm font-medium text-zinc-400 group hover:border-amber-500/50 transition-colors">
-                            <span class="iconify text-amber-400/90" data-icon="lucide:clock" data-width="20" stroke-width="1.5"></span>
-                            <span>CompTIA Security+</span>
-                            <span class="rounded bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400/90">In progress</span>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="relative pb-5">
+                                <img src="images/certs/solutions_architect_professional.png" alt="AWS Solutions Architect – Professional" class="w-[120px] h-[120px] object-contain rounded-lg border border-dashed border-zinc-600 opacity-60 grayscale" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                                <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800/80 border border-dashed border-zinc-600 items-center justify-center text-zinc-500 text-center text-xs">SAP</span>
+                                <span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 rounded bg-zinc-700/50 px-2 py-0.5 text-xs font-medium text-zinc-400 whitespace-nowrap">After MLA</span>
+                            </div>
+                            <span class="text-sm font-medium text-zinc-500 text-center max-w-[140px]">AWS Solutions Architect – Professional</span>
                         </div>
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900/80 border border-dashed border-zinc-600 px-4 py-3 text-sm font-medium text-zinc-500 group hover:border-zinc-500 transition-colors">
-                            <span class="iconify text-zinc-500" data-icon="lucide:list-end" data-width="20" stroke-width="1.5"></span>
-                            <span>AWS Certified Machine Learning Engineer – Associate</span>
-                            <span class="rounded bg-zinc-700/50 px-2 py-0.5 text-xs font-medium text-zinc-400">After SAA</span>
-                        </div>
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900/80 border border-dashed border-zinc-600 px-4 py-3 text-sm font-medium text-zinc-500 group hover:border-zinc-500 transition-colors">
-                            <span class="iconify text-zinc-500" data-icon="lucide:list-end" data-width="20" stroke-width="1.5"></span>
-                            <span>AWS Certified Solutions Architect – Professional</span>
-                            <span class="rounded bg-zinc-700/50 px-2 py-0.5 text-xs font-medium text-zinc-400">After MLA</span>
-                        </div>
-                        <div class="flex items-center gap-3 rounded-md bg-zinc-900/80 border border-dashed border-zinc-600 px-4 py-3 text-sm font-medium text-zinc-500 group hover:border-zinc-500 transition-colors">
-                            <span class="iconify text-zinc-500" data-icon="lucide:list-end" data-width="20" stroke-width="1.5"></span>
-                            <span>AWS Certified Generative AI Developer – Professional</span>
-                            <span class="rounded bg-zinc-700/50 px-2 py-0.5 text-xs font-medium text-zinc-400">After SAP</span>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="relative pb-5">
+                                <img src="images/certs/generative_ai_developer.png" alt="AWS Generative AI Developer – Professional" class="w-[120px] h-[120px] object-contain rounded-lg border border-dashed border-zinc-600 opacity-60 grayscale" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');">
+                                <span class="hidden flex w-[120px] h-[120px] rounded-lg bg-zinc-800/80 border border-dashed border-zinc-600 items-center justify-center text-zinc-500 text-center text-xs">Gen AI</span>
+                                <span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 rounded bg-zinc-700/50 px-2 py-0.5 text-xs font-medium text-zinc-400 whitespace-nowrap">After SAP</span>
+                            </div>
+                            <span class="text-sm font-medium text-zinc-500 text-center max-w-[140px]">AWS Generative AI Developer – Professional</span>
                         </div>
                     </div>
                 </section>
