@@ -454,9 +454,56 @@ transition: opacity 0.3s;
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="architecture" role="tab" aria-selected="false">Architecture</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="error-handling" role="tab" aria-selected="false">Error Handling</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="reliability" role="tab" aria-selected="false">Reliability</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="api" role="tab" aria-selected="false">API</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="aws" role="tab" aria-selected="false">AWS</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="sqs" role="tab" aria-selected="false">SQS</button>
                     </div>
 
                     <ul id="blog-list" class="space-y-8">
+                        <li class="blog-item" data-tags="architecture api aws sqs reliability">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                        Moving a Slow API Out of the Critical Path
+                                    </h3>
+                                    <p class="mt-3 ml-6 text-sm text-zinc-500">Queue-based design, Prefect flows, and weighted round-robin so the Speedship API no longer blocks users.</p>
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">API</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">AWS</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">SQS</span>
+                                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Reliability</span>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>When we first integrated with the Speedship API, the simplest approach seemed like the right one. A user would enter shipment details, submit the request, and our application would call the Speedship API directly to retrieve rates. The problem was that the API has fairly strict performance and concurrency constraints. Some calls take time to complete, and if too many requests hit the service at once, it can become overwhelmed.</p>
+                                    <p>In the early version of the system, this meant users were sometimes left staring at a loading spinner while the application waited for the API to respond. That kind of experience is frustrating for users and fragile for the system. If several users submitted requests at the same time, the load could spike quickly, which risked slowing everything down even further.</p>
+                                    <p>We realized that the core problem was architectural: we had put a slow external dependency directly in the critical path of the user experience.</p>
+                                    <p class="font-medium text-zinc-300 mt-4">Moving to a Queue-Based Architecture</p>
+                                    <p>To solve this, we redesigned the workflow around a queue. Instead of calling the Speedship API directly from the user interface, requests are now placed into a queue as jobs. Each job represents a shipment rating request that needs to be processed.</p>
+                                    <p>This decouples the user action from the API call. When a user submits shipment information, the system records the request and places it in the queue immediately. The UI can then show the request in a table with a status such as queued, processing, or completed. Once the job finishes, the user can open the result and continue working with it.</p>
+                                    <p>From the user's perspective, this removes the waiting entirely. Instead of blocking on a slow request, they can submit shipments and see them progress through the system.</p>
+                                    <p class="font-medium text-zinc-300 mt-4">Prefect Flows as Workers</p>
+                                    <p>Each job in the queue triggers a Prefect flow that handles the actual API interaction. Prefect works well for this kind of task because it provides orchestration, retries, observability, and structured execution for each request.</p>
+                                    <p>When a job is picked up, the flow performs the Speedship API call, processes the response, and stores the results back into the system. If the API fails or returns an error, Prefect handles retries and failure tracking automatically.</p>
+                                    <p>This approach turns what used to be a fragile synchronous request into a controlled background process.</p>
+                                    <p class="font-medium text-zinc-300 mt-4">Managing Concurrency Carefully</p>
+                                    <p>The Speedship API still has concurrency limits, so we also needed a way to regulate how requests are executed. We use a distributed semaphore backed by DynamoDB: there are 10 tickets available at any time. A job can only run when it acquires a ticket; when it finishes, it releases the ticket back. That way we never have more than 10 jobs hitting the API at once, which keeps us under the service's limits. You could call it throttling or rate limiting on our side; either way, only 10 workers have access at a time.</p>
+                                    <p>Not all shipment requests are equal. Some involve a small number of shipments and complete quickly, while others contain much larger batches that take longer to process.</p>
+                                    <p>If we processed jobs strictly in first-in-first-out order, a few large requests could dominate the queue and delay smaller jobs behind them. That kind of starvation would create uneven performance and frustrate users who only submitted a small shipment.</p>
+                                    <p>To avoid that problem, we implemented a weighted round-robin scheduling strategy. Requests are categorized by size, and the scheduler rotates between these categories when assigning work. Smaller jobs get consistent opportunities to run, even if larger jobs are present in the queue.</p>
+                                    <p>The result is a more balanced system. Small requests complete quickly, large jobs still move forward steadily, and the API never gets overwhelmed.</p>
+                                    <p class="font-medium text-zinc-300 mt-4">A Better User Experience</p>
+                                    <p>From the outside, the change is simple but powerful. Users submit shipment information and immediately see the request appear in a table with its current status. As the background flows process the job, the status updates. Once it is complete, the user can open the result, review the rates, and make adjustments if needed.</p>
+                                    <p>Instead of waiting on a loading screen, users now interact with a system that shows progress and lets them continue working.</p>
+                                    <p class="font-medium text-zinc-300 mt-4">A More Resilient System</p>
+                                    <p>Moving the Speedship integration behind a queue also made the system much more resilient. Because requests are processed asynchronously, temporary API slowdowns no longer block users. If something fails, jobs can be retried safely without losing data. And because the queue regulates concurrency, we stay within the limits of the external service.</p>
+                                    <p>In short, the system now absorbs the complexity of a slow external API rather than exposing that complexity to the user.</p>
+                                    <p>What started as a simple API integration ultimately led to a much stronger architecture. By introducing queues, Prefect flows, and fair scheduling through weighted round robin, we turned a fragile synchronous workflow into a scalable, reliable pipeline for handling shipment requests.</p>
+                                </div>
+                            </details>
+                        </li>
                         <li class="blog-item" data-tags="security fundamentals">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
