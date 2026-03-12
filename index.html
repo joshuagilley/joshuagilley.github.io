@@ -457,9 +457,42 @@ transition: opacity 0.3s;
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="api" role="tab" aria-selected="false">API</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="aws" role="tab" aria-selected="false">AWS</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="sqs" role="tab" aria-selected="false">SQS</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="idempotency" role="tab" aria-selected="false">Idempotency</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="llm" role="tab" aria-selected="false">LLM</button>
                     </div>
 
                     <ul id="blog-list" class="space-y-8">
+                        <li class="blog-item" data-tags="architecture idempotency llm reliability">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <div class="flex flex-col gap-2">
+                                        <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                            <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            Idempotency in APIs and LLM Systems
+                                        </h3>
+                                        <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                                            <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 6, 2026</p>
+                                            <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">Why idempotency matters for retries, data integrity, and how it gets trickier once large language models enter the picture.</p>
+                                        </div>
+                                        <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Idempotency</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">LLM</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Reliability</span>
+                                        </div>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Idempotency is one of those ideas that quietly does a lot of work for reliability. An operation is idempotent if doing it once or ten times leaves the system in the same final state. Classic example: a REST API that updates a user's email with a PUT request. If the client retries that request a few times because of a flaky network, only the first call actually changes the email. The rest see that the desired state is already there and do nothing.</p>
+                                    <p>That property is gold in distributed systems. It makes retries safe, simplifies error handling, and stops ugly side effects like double-charging a customer or writing duplicate records. It also helps the user: if they smash the submit button a couple of times, they don't accidentally trigger the action multiple times.</p>
+                                    <p>We get there with stuff like idempotency keys (\"if I've seen this key before, don't do it again\"), conditional updates in the database, and using HTTP methods the way they're meant to be used. PUT and DELETE can change state, but they should do it in a way that's safe to repeat. GET shouldn't change state at all.</p>
+                                    <p>The interesting part lately is how this idea runs into large language models. Traditional systems are mostly deterministic. If you send the same request to the same service, you usually get the same answer. LLMs aren't like that. Sampling, temperature, model updates, even a bit of extra context can nudge the output in a different direction.</p>
+                                    <p>In an LLM-driven workflow that calls tools, writes to databases, or pushes onto queues, that non-determinism matters. A retry isn't just \"run the same code path again\"; the model might make a slightly different decision, generate a slightly different JSON structure, or call a different tool altogether. If you're not careful, that can mean duplicate side effects or inconsistent state.</p>
+                                    <p>So idempotency with LLMs ends up being less about the model itself and more about the system around it. You separate \"thinking\" from \"doing\". Let the model reason, but wrap every side-effectful action in something idempotent: idempotency keys, guards around writes, state checkpoints, validation before commit. Tool calls get wrapped so that \"run this again\" is safe, even if the model tries to take the same action twice.</p>
+                                    <p>As these systems move from demos into production, idempotency stops being just an HTTP or database design detail. It turns into an architectural concern that sits right where distributed systems, workflow orchestration, and LLM behavior all meet. Getting it right is what lets you retry aggressively, recover from weird states, and still sleep at night.</p>
+                                </div>
+                            </details>
+                        </li>
                         <li class="blog-item" data-tags="architecture api aws sqs reliability">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
