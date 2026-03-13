@@ -449,9 +449,9 @@ transition: opacity 0.3s;
 
                     <div id="blog-pills" class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter posts by tag">
                         <button type="button" class="blog-pill active rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="all" role="tab" aria-selected="true">All</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="architecture" role="tab" aria-selected="false">Architecture</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="security" role="tab" aria-selected="false">Security</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="fundamentals" role="tab" aria-selected="false">Fundamentals</button>
-                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="architecture" role="tab" aria-selected="false">Architecture</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="error-handling" role="tab" aria-selected="false">Error Handling</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="reliability" role="tab" aria-selected="false">Reliability</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="api" role="tab" aria-selected="false">API</button>
@@ -459,9 +459,45 @@ transition: opacity 0.3s;
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="sqs" role="tab" aria-selected="false">SQS</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="idempotency" role="tab" aria-selected="false">Idempotency</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="llm" role="tab" aria-selected="false">LLM</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="infrastructure" role="tab" aria-selected="false">Infrastructure</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="local-llm" role="tab" aria-selected="false">Local LLM</button>
                     </div>
 
                     <ul id="blog-list" class="space-y-8">
+                        <li class="blog-item" data-tags="architecture infrastructure local-llm llm reliability">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <div class="flex flex-col gap-2">
+                                        <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                            <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            Building a Janky Little Private AI Node at Home
+                                        </h3>
+                                        <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                                            <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 13, 2026</p>
+                                            <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">Running a coding model on a Mac Mini over Tailscale, watching memory light up, and learning how real AI infrastructure behaves when it is slow, wrong, and very, very local.</p>
+                                        </div>
+                                        <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Infrastructure</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Local LLM</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Reliability</span>
+                                        </div>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>Over the past few days I turned my Mac Mini into something that kind of, sort of, behaves like a tiny private AI coding cluster. The idea was simple: run an LLM locally, tunnel into it over Tailscale, and have my IDE talk to it like it was a normal OpenAI endpoint. In practice it was a lot of \"why is this so slow,\" \"why is memory pegged at 95%,\" and \"why is this answer completely wrong?\"</p>
+                                    <p>The architecture ended up surprisingly legit: Cursor on my laptop, talking to Cline, talking to an OpenAI-compatible endpoint, talking to an LM Studio server on the Mac Mini, talking to a Qwen coding model. The nice part is all the layers are cleanly separated. The IDE agent handles context and edits, the API layer just speaks the OpenAI protocol, the inference engine does the heavy lifting, and the actual model can be swapped without touching the rest.</p>
+                                    <p>Getting models running in LM Studio taught me that \"downloaded\" and \"actually running\" are very different states. A model sits on disk, then it has to be loaded into memory, then it has to be served. Only the loaded ones eat RAM. Once I moved to the CLI and started running LM Studio headless, the Mac Mini stopped feeling like a regular computer and started feeling like a little inference node I could SSH into and script.</p>
+                                    <p>Tailscale was the glue that made this feel real. Once both machines were on the same tailnet, I could hit the Mac Mini's LM Studio endpoint from my laptop as if it were on my desk. Cline didn't care that it wasn't talking to OpenAI proper; it just saw an API URL and a model name. Suddenly my editor was driving code changes through a model that was literally running in my living room.</p>
+                                    <p>Then the fun part: everything was slow and kind of wrong.</p>
+                                    <p>Small prompts were fine, but as soon as the agent started doing real work – pulling in file contents, tool schemas, system prompts, and chat history – the model would chug. A simple request like \"find this file and add a console.log\" would balloon into a massive prompt that torched memory. On a 16 GB machine, watching Activity Monitor while a big context went through was... educational. Here's a snapshot from one of the runs:</p>
+                                    <p class="mt-2"><img src="images/screenshots/memory.png" alt="macOS memory pressure screenshot while running a local LLM" class="w-full max-w-xl rounded-lg border border-zinc-800"></p>
+                                    <p>Memory pressure pinned, swap usage climbing, fans spun up, and the model still sometimes hallucinated nonsense or lost track of what file it was editing. The first request after a restart was always especially bad – classic cold start behavior while the runtime warmed up, allocated KV cache, and did all the prefill work. Once it was warm, things got faster, but you could still feel every extra token as latency and RAM.</p>
+                                    <p>What I liked about this setup is that it exposes what cloud tools hide. You see how much work the IDE agent is doing: building huge prompts, juggling context windows, orchestrating tools. You feel what happens when you ask for \"bigger context\" on a small box. Tokens stop being an abstract billing unit and turn into real CPU cycles, real memory, and very real slowness.</p>
+                                    <p>Despite the jank, it was a blast. I came away with a much clearer mental model of modern coding assistants: they are distributed systems. There's an agent runtime, an API layer, one or more model backends, networking, retries, cold starts, and all the usual infra tradeoffs. Even though my Mac Mini setup isn't production-grade and the model still loses the plot sometimes, it already feels less like \"using an AI feature\" and more like running my own little AI lab at home.</p>
+                                </div>
+                            </details>
+                        </li>
                         <li class="blog-item" data-tags="architecture idempotency llm reliability">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
