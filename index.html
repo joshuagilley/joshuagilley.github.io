@@ -461,9 +461,42 @@ transition: opacity 0.3s;
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="llm" role="tab" aria-selected="false">LLM</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="infrastructure" role="tab" aria-selected="false">Infrastructure</button>
                         <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="local-llm" role="tab" aria-selected="false">Local LLM</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="firebase" role="tab" aria-selected="false">Firebase</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="terraform" role="tab" aria-selected="false">Terraform</button>
+                        <button type="button" class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300" data-tag-filter="gcp" role="tab" aria-selected="false">GCP</button>
                     </div>
 
                     <ul id="blog-list" class="space-y-8">
+                        <li class="blog-item" data-tags="architecture firebase terraform gcp">
+                            <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                                <summary class="cursor-pointer list-none">
+                                    <div class="flex flex-col gap-2">
+                                        <h3 class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2">
+                                            <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span></span>
+                                            Config-Driven Environments: Firebase, Terraform, and P4
+                                        </h3>
+                                        <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                                            <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 16, 2026</p>
+                                            <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">How we stopped manually wiring every new stage and let developers stand up Firebase + Cloud Run + Terraform envs from a single config.</p>
+                                        </div>
+                                        <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Firebase</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Terraform</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">GCP</span>
+                                            <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500">Architecture</span>
+                                        </div>
+                                    </div>
+                                </summary>
+                                <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                                    <p>When we started scaling apps and teams, spinning up new environments was way too manual. Every new stage or dev deployment meant touching Firebase settings, wiring secrets, configuring routing, and hoping it matched production enough to be useful. We wanted developers to stand up envs quickly, keep behavior consistent, and avoid fragile one-off setup. So we built a cleaner DevOps flow around Firebase, Nuxt, Cloud Run, and Terraform, orchestrated through our Perceptivity platform (P4).</p>
+                                    <p>At the core is Firebase. Each environment is tied to a Firebase project: Firestore rules, indexes, storage rules, auth. On the client we use a Nuxt plugin that exposes Auth, Firestore, Storage, and Analytics; Firestore listeners hydrate Pinia so users and orgs stay in sync. We avoid hardcoding Firebase config and inject it via runtime env vars, so the same codebase deploys to dev, staging, or prod without changes. On the server we use the Firebase Admin SDK. Cloud Run gives us Application Default Credentials, so we rarely pass credentials manually; we still support service account JSON for scripts and admin ops. A simple runtime flag picks which Firestore instance to use, so the same server utilities work locally, in staging, and in production.</p>
+                                    <p>Secrets are layered: locally you use env vars or a git-ignored service account file; in CI, GitHub workflows pull from Doppler and write to temp locations; in production, secrets live in Google Cloud Secret Manager and get injected into Cloud Run at deploy time. That keeps credentials out of the repo while keeping deploys secure and repeatable.</p>
+                                    <p>Infrastructure is fully Terraform. Load balancers, SSL certs, DNS, global IPs, Route 53 records – all provisioned from code. Remote state lives in a GCS bucket with environment-specific prefixes so each app and env can be managed independently. Variables like app name, domain, region, and Cloud Run service name come from P4 config, so P4 is the single source of truth for deployment and environment metadata.</p>
+                                    <p>GitHub workflows tie it together. A typical deploy builds the image, fetches secrets, deploys to Cloud Run, and runs Terraform when infra changes. We also have a dedicated infra workflow that authenticates with GCP and AWS, runs Terraform plan/apply, and writes outputs back into Doppler. That keeps app deploys fast while infra changes stay controlled.</p>
+                                    <p>With P4, creating an environment is config-driven. Developers define env settings, domains, and optional Terraform in an app config; P4 runs the deployment, injects runtime config, provisions routing and SSL, and the env is live once DNS propagates. The result is faster spin-up, better parity with production, centralized secrets, and clearer ownership. We're now focusing more on features and less on environment drift, and we're looking at shared Terraform modules, PR preview envs, and better observability so infra stays invisible without sacrificing safety.</p>
+                                </div>
+                            </details>
+                        </li>
                         <li class="blog-item" data-tags="architecture infrastructure local-llm llm reliability">
                             <details class="project-details group/blog border-b border-zinc-800 pb-8">
                                 <summary class="cursor-pointer list-none">
