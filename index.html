@@ -879,6 +879,15 @@
               <button
                 type="button"
                 class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="zero-trust"
+                role="tab"
+                aria-selected="false"
+              >
+                Zero-Trust
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
                 data-tag-filter="fundamentals"
                 role="tab"
                 aria-selected="false"
@@ -996,6 +1005,67 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li class="blog-item" data-tags="aws gcp security cloud-run zero-trust federation identity">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        From Static AWS Keys to Workload Identity on a GCP → AWS Pipeline
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 18, 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          Replacing long-lived admin keys in config with a Cloud Run service account, federated tokens,
+                          and a least-privilege IAM role for S3 and DynamoDB.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >AWS</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >GCP</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Cloud Run</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Zero-Trust</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Security</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      We recently refactored a cross-cloud ingestion service for a client. It runs on Google Cloud Run
+                      and writes documents and metadata into AWS S3 and DynamoDB. Early on we leaned on long-lived
+                      administrator access keys sitting in application configuration. That got us moving fast, but it
+                      also meant a bigger blast radius than we wanted, and it made rotation, clean separation between
+                      environments, and auditing harder than it needed to be.
+                    </p>
+                    <p>
+                      The new design attaches a dedicated Google service account to the Cloud Run workload. At runtime
+                      the app mints short-lived identity tokens and exchanges them with AWS STS through web identity
+                      federation, then assumes a narrow IAM role in AWS. That role only does what this workflow needs:
+                      upload and fetch objects under specific S3 paths and read or write records in one DynamoDB table,
+                      with no broad account access.
+                    </p>
+                    <p>
+                      We dropped static credentials, kept IAM policies tight, and rely on ephemeral tokens tied to the
+                      workload. It lines up with zero-trust style thinking without turning operations into a science
+                      project, and it should stay manageable as the ingestion pipeline grows.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li class="blog-item" data-tags="doppler security">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
