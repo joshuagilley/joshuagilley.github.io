@@ -1002,9 +1002,99 @@
               >
                 Doppler
               </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="projects"
+                role="tab"
+                aria-selected="false"
+              >
+                Projects
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="cli"
+                role="tab"
+                aria-selected="false"
+              >
+                CLI
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="ci-cd"
+                role="tab"
+                aria-selected="false"
+              >
+                CI/CD
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="dev-tools"
+                role="tab"
+                aria-selected="false"
+              >
+                Dev Tools
+              </button>
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li class="blog-item" data-tags="projects cli ci-cd dev-tools">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        SlopSniff: A CI Checkpoint for Code Quality Drift
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 19, 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          A small internal tool to catch bloat, weak abstractions, and “good enough” generated code in
+                          the pipeline before the repo gets weighed down.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Projects</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >CLI</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >CI/CD</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Dev Tools</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      I’m starting SlopSniff as a small internal tool to help our team catch a problem that’s becoming
+                      more common in modern CI/CD workflows: code that technically works, passes a quick review, and
+                      maybe was even written by a capable engineer, but still adds unnecessary bloat, duplication, weak
+                      abstractions, or hard-to-maintain patterns. AI has made it easier than ever to move fast, and that
+                      includes senior developers who absolutely know better but still fall into the trap of letting
+                      generated code pile up faster than it gets refined.
+                    </p>
+                    <p>
+                      SlopSniff is my attempt to put a lightweight checkpoint into the pipeline so we can catch that
+                      drift earlier, before a repo gets weighed down by helper sprawl, copy-pasted logic, vague naming,
+                      giant files, or suspicious layers of abstraction that nobody really asked for. The goal is not to
+                      shame AI-assisted development or slow teams down, but to create a healthier feedback loop in CI/CD
+                      that helps us keep speed without quietly sacrificing code quality.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li class="blog-item" data-tags="aws gcp security cloud-run zero-trust federation identity">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
