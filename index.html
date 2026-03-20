@@ -1051,13 +1051,13 @@
                         <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
                           ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
                         ></span>
-                        SlopSniff: A CI Checkpoint for Code Quality Drift
+                        SlopSniff v1 Released: CI Signal for Code Quality Drift
                       </h3>
                       <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
                         <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 19, 2026</p>
                         <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
-                          A small internal tool to catch bloat, weak abstractions, and “good enough” generated code in
-                          the pipeline before the repo gets weighed down.
+                          SlopSniff is now live on PyPI: a lightweight CLI that scores large files, duplicate functions,
+                          and helper sprawl, then gates CI when slop crosses your threshold.
                         </p>
                       </div>
                       <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
@@ -1078,19 +1078,105 @@
                   </summary>
                   <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
                     <p>
-                      I’m starting SlopSniff as a small internal tool to help our team catch a problem that’s becoming
-                      more common in modern CI/CD workflows: code that technically works, passes a quick review, and
-                      maybe was even written by a capable engineer, but still adds unnecessary bloat, duplication, weak
-                      abstractions, or hard-to-maintain patterns. AI has made it easier than ever to move fast, and that
-                      includes senior developers who absolutely know better but still fall into the trap of letting
-                      generated code pile up faster than it gets refined.
+                      SlopSniff is now an actual shipped tool, not just an idea. It is a lightweight CLI for catching
+                      codebase slop before it hardens into long-term maintenance pain.
                     </p>
                     <p>
-                      SlopSniff is my attempt to put a lightweight checkpoint into the pipeline so we can catch that
-                      drift earlier, before a repo gets weighed down by helper sprawl, copy-pasted logic, vague naming,
-                      giant files, or suspicious layers of abstraction that nobody really asked for. The goal is not to
-                      shame AI-assisted development or slow teams down, but to create a healthier feedback loop in CI/CD
-                      that helps us keep speed without quietly sacrificing code quality.
+                      <a class="text-indigo-400 hover:text-indigo-300 underline" href="https://pypi.org/project/slopsniff/"
+                        >PyPI release</a
+                      >
+                      |
+                      <a
+                        class="text-indigo-400 hover:text-indigo-300 underline"
+                        href="https://github.com/joshuagilley/slopsniff/actions/workflows/ci.yml"
+                        >CI status</a
+                      >
+                    </p>
+                    <p>
+                      SlopSniff is not trying to detect whether code came from AI. It flags the patterns teams accumulate
+                      when speed outpaces cleanup: giant files, duplicated function bodies, versioned helper sprawl, and
+                      low-cohesion utility patterns.
+                    </p>
+                    <p class="font-medium text-zinc-300 mt-4">Install</p>
+                    <pre
+                      class="rounded-lg bg-zinc-900 border border-zinc-800 p-3 text-xs text-zinc-400 overflow-x-auto"
+                    ><code>pip install slopsniff
+# or
+uv add slopsniff</code></pre>
+                    <p class="font-medium text-zinc-300 mt-4">Usage</p>
+                    <pre
+                      class="rounded-lg bg-zinc-900 border border-zinc-800 p-3 text-xs text-zinc-400 overflow-x-auto"
+                    ><code>slopsniff .
+slopsniff ./src
+slopsniff . --fail-threshold 30
+slopsniff . --format json
+slopsniff . --verbose
+slopsniff . --max-file-lines 300 --max-function-lines 40</code></pre>
+                    <p>
+                      Main flags:
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">--fail-threshold</code>
+                      (default 20),
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">--format</code>
+                      (terminal/json),
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">--verbose</code>,
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">--max-file-lines</code>,
+                      and
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs"
+                        >--max-function-lines</code
+                      >.
+                    </p>
+                    <p class="font-medium text-zinc-300 mt-4">Scoring model</p>
+                    <p>
+                      Severity scores are low = 2, medium = 5, high = 10. Status is healthy at 0-9, warning at 10-19,
+                      and fail at 20+ (or your custom threshold). SlopSniff exits non-zero when the threshold is met, so
+                      it drops directly into CI gates.
+                    </p>
+                    <p class="font-medium text-zinc-300 mt-4">Rule set (v1)</p>
+                    <p>
+                      <strong>large-file:</strong> medium at 400+ lines, high at 800+.<br />
+                      <strong>large-function:</strong> medium at 50+ lines, high at 100+.<br />
+                      <strong>duplicate-functions:</strong> exact normalized body matches across 2+ locations (high).<br />
+                      <strong>helper-sprawl:</strong> generic utility filenames (low) and versioned function clusters
+                      like <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">_v2</code>,
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">_legacy</code>,
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">_temp</code>
+                      (medium).
+                    </p>
+                    <p class="font-medium text-zinc-300 mt-4">Language support</p>
+                    <p>
+                      Python uses AST parsing for accurate function spans. JS/TS/TSX/Vue use regex plus brace-depth
+                      heuristics for fast cross-language coverage.
+                    </p>
+                    <p class="font-medium text-zinc-300 mt-4">GitHub Actions example</p>
+                    <pre
+                      class="rounded-lg bg-zinc-900 border border-zinc-800 p-3 text-xs text-zinc-400 overflow-x-auto"
+                    ><code>name: SlopSniff
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  slopsniff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install slopsniff
+      - run: slopsniff . --fail-threshold 20</code></pre>
+                    <p class="font-medium text-zinc-300 mt-4">Why this exists</p>
+                    <p>
+                      AI changed how fast all of us write code. The working version lands quickly, but the
+                      refine-and-consolidate pass gets skipped. SlopSniff is a smoke alarm for that drift. It does not
+                      replace code review, but it creates an early feedback loop before patterns spread through the repo.
+                    </p>
+                    <p class="font-medium text-zinc-300 mt-4">Roadmap</p>
+                    <p>
+                      .slopsniff.toml config support, changed-only mode via git diff, near-duplicate detection,
+                      tree-sitter parsers, PR annotations, score baselining, suppression comments, and Homebrew tap
+                      support.
                     </p>
                   </div>
                 </details>
