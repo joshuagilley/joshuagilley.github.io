@@ -1200,68 +1200,6 @@ jobs:
                   </div>
                 </details>
               </li>
-              <li class="blog-item" data-tags="architecture firebase terraform gcp">
-                <details class="project-details group/blog border-b border-zinc-800 pb-8">
-                  <summary class="cursor-pointer list-none">
-                    <div class="flex flex-col gap-2">
-                      <h3
-                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
-                      >
-                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
-                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
-                        ></span>
-                        Fyx-Fleet: Firebase, Terraform, and p4 Hosting Setup
-                      </h3>
-                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">Mar 16, 2026</p>
-                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
-                          How we host an app (Fyx-Fleet) on Cloud Run with Firebase auth, Terraform-managed domain and SSL, and embed it in the p4 portal with JWT + uid.
-                        </p>
-                      </div>
-                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
-                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
-                          >Firebase</span
-                        >
-                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
-                          >Terraform</span
-                        >
-                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
-                          >GCP</span
-                        >
-                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
-                          >Architecture</span
-                        >
-                      </div>
-                    </div>
-                  </summary>
-                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
-                    <p>
-                      <strong>Current state.</strong> p4 (Perceptivity) is the portal at p4.bearcognition.com / p4-staging.bearcognition.com. It uses Firebase (project p3-prod-aa94d), Terraform, and Cloud Run. It embeds other apps as modules (e.g. Dash Module, Client Embed) via iframe, passing <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">jwt</code> and <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">uid</code> (and optional filters) on the URL. Fyx-Fleet is the app we're hosting and “housing” in p4: it gets its own Cloud Run URL (e.g. fyx-fleet.bearcognition.com) and p4 embeds it; p4 does not run Fyx-Fleet. Reference patterns in our workspace: MailManagement-BidOptimizer (Nuxt + Firebase + Terraform + app-config + deploy workflows) and ltl-ros-DASH (dashapps/ Terraform state prefix and deploy workflows).
-                    </p>
-                    <p class="font-medium text-zinc-300 mt-4">Architecture (high level)</p>
-                    <p>
-                      Same Firebase project (p3-prod-aa94d) for both p4 and Fyx-Fleet. The JWT p4 passes in the iframe URL is a Firebase ID token; Fyx-Fleet verifies it with the same project, so no cross-project setup. p4’s Dash Module UI builds the iframe URL with <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">?jwt=...&amp;uid=...</code>; Fyx-Fleet reads those on load, calls <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">verifyIdToken(jwt)</code> on the server, then uses the decoded uid for user/org context. Never trust uid without verifying the JWT.
-                    </p>
-                    <p class="mt-2"><img src="images/screenshots/bear_infrastructure_p4.png" alt="p4 Portal, Fyx-Fleet App, and GCP architecture diagram" class="w-full max-w-xl rounded-lg border border-zinc-800"></p>
-                    <p class="font-medium text-zinc-300 mt-4">Firebase setup for Fyx-Fleet</p>
-                    <p>
-                      Use the existing Firebase project p3-prod-aa94d. Client: same config as p4 (projectId, apiKey, authDomain, etc.) via env/runtime config. Server: mirror p4’s admin init (Application Default Credentials in GCP; <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">GOOGLE_APPLICATION_CREDENTIALS</code> locally). Credentials: locally use a git-ignored <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">firebaseServiceAccount.json</code> or env; in CI store full JSON in Doppler as <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">FIREBASE_SERVICE_ACCOUNT</code> and write to e.g. <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">/tmp/firebaseServiceAccount.json</code>; on Cloud Run use Secret Manager or ADC. Add <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">firebase.json</code> / <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">.firebaserc</code> (default project p3-prod-aa94d) and Firestore/Storage rules as needed.
-                    </p>
-                    <p class="font-medium text-zinc-300 mt-4">Terraform and deploy (Fyx-Fleet as its own app)</p>
-                    <p>
-                      GCP project p3-prod-aa94d. State in GCS bucket <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">p3-prod-aa94d-terraform-state</code> with prefixes <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">dashapps/fyx-fleet-staging</code> and <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">dashapps/fyx-fleet-production</code>. Terraform: global IP, managed SSL cert, backend service, URL maps (HTTPS + HTTP→HTTPS redirect), target proxies, forwarding rules; optionally Route 53 A record if domain is in AWS. Variables from app-config (app_name, environment, domain_name, gcp_project_id, region, cloud_run_service_name, etc.). Deploy SA (and WIF) for Run, Artifact Registry, Secret Manager; GitHub secret for deploy SA. Workflows: staging/production build → push image → deploy Cloud Run; Doppler for secrets; optional Terraform step with the dashapps/ prefix; optional dedicated deploy-infrastructure-terraform workflow.
-                    </p>
-                    <p class="font-medium text-zinc-300 mt-4">p4 integration (“housed in p4”)</p>
-                    <p>
-                      No code change in p4 for “hosting”: p4 already supports Dash/Client Embed modules via <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">customUrl</code> and iframe with jwt + uid. In p4 admin, create a Dash Module (or Client Embed) for the orgs that should see Fyx-Fleet, set <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">customUrl</code> to the Fyx-Fleet URL (e.g. https://fyx-fleet.bearcognition.com), and assign the module to groups/users. Fyx-Fleet: on load read jwt/uid from query params, verify JWT server-side (or via Firebase client), then use uid for user/org context; optionally support the same optional params p4 sends (e.g. bc_mv_UserEmail, bc_mv_CustomerId).
-                    </p>
-                    <p class="font-medium text-zinc-300 mt-4">Secrets and checklist</p>
-                    <p>
-                      GitHub/Doppler: GCP_PROJECT_ID (p3-prod-aa94d), GCP_REGION, WIF provider if used, deploy SA; FIREBASE_SERVICE_ACCOUNT (full JSON); AWS creds and Route 53 zone if Terraform manages DNS. Checklist: (1) Firebase — use p3-prod-aa94d, get service account key, add to Doppler as FIREBASE_SERVICE_ACCOUNT; Cloud Run ADC or Secret Manager. (2) Terraform — create state prefix dashapps/fyx-fleet-staging and -production; deploy SA with access to state bucket and Run; init with bucket/prefix; plan/apply for LB + SSL + domain. (3) Deploy — app-config.yaml and workflows; deploy staging first; confirm Fyx-Fleet URL. (4) p4 — add Dash Module with customUrl = Fyx-Fleet URL; test with a user that has access. Doc this in README or docs/SETUP.md and terraform/README.md (prerequisites, bucket/prefix, optional DEPLOY runbook). Optional: separate Doppler project for Fyx-Fleet; if Terraform moves to Black-Betty-Infrastructure, add apps/fyx-fleet/staging and production there and point the workflow accordingly.
-                    </p>
-                  </div>
-                </details>
-              </li>
               <li class="blog-item" data-tags="architecture infrastructure local-llm llm reliability">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
