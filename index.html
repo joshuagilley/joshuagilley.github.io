@@ -508,6 +508,69 @@
             </div>
 
             <ul class="group/list">
+              <!-- Project: SlopSniff -->
+              <li class="mb-12">
+                <div
+                  class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+                >
+                  <div
+                    class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg border border-transparent transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:border-zinc-800 lg:group-hover:bg-zinc-900/30"
+                  ></div>
+                  <div class="z-10 sm:order-2 sm:col-span-6">
+                    <h3>
+                      <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base"
+                        >SlopSniff</span
+                      >
+                    </h3>
+                    <p class="mt-2 text-sm leading-normal">
+                      A small Python CLI on
+                      <a
+                        class="text-indigo-400 hover:text-indigo-300 underline"
+                        href="https://pypi.org/project/slopsniff/"
+                        rel="noopener noreferrer"
+                        >PyPI</a
+                      >
+                      that scans repos for quality drift: oversized files and functions, duplicate bodies, and helper
+                      sprawl. It scores findings and can fail CI when slop crosses a threshold you set. Not about calling
+                      out AI; it’s about catching patterns that pile up when everyone moves fast.
+                      <a class="text-indigo-400 hover:text-indigo-300 underline" href="#blog-slopsniff"
+                        >Full write-up in the blog</a
+                      >.
+                    </p>
+                    <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          Python
+                        </div>
+                      </li>
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          CLI
+                        </div>
+                      </li>
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          CI/CD
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="z-10 sm:order-1 sm:col-span-2">
+                    <div
+                      class="aspect-video w-32 sm:w-full rounded border-2 border-zinc-800 bg-zinc-900 transition group-hover:border-zinc-700 sm:order-1 sm:col-span-2 sm:translate-y-1 flex items-center justify-center text-zinc-500 group-hover:text-indigo-400"
+                    >
+                      <span class="iconify" data-icon="lucide:scan-search" data-width="24" stroke-width="1.5"></span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
               <!-- Project 1: Load Agent (Bear Cognition) -->
               <li class="mb-12">
                 <div
@@ -1041,7 +1104,7 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
-              <li class="blog-item" data-tags="projects cli ci-cd dev-tools">
+              <li id="blog-slopsniff" class="blog-item scroll-mt-24" data-tags="projects cli ci-cd dev-tools">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
                     <div class="flex flex-col gap-2">
