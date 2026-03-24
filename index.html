@@ -931,9 +931,97 @@
               >
                 Dev Tools
               </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="npm"
+                role="tab"
+                aria-selected="false"
+              >
+                npm
+              </button>
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li class="blog-item" data-tags="projects cli ci-cd dev-tools npm node">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        SlopSniff on npm: Python Scanner, JavaScript-Style Install
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">March 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          JS and TS repos can use <code class="rounded bg-zinc-800 px-1 py-0.5 font-mono text-xs text-zinc-300">slopsniff-cli</code> on npm; the real tool stays Python, the wrapper is Node + <code class="rounded bg-zinc-800 px-1 py-0.5 font-mono text-xs text-zinc-300">uv</code>.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Projects</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >CLI</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >npm</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >CI/CD</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      SlopSniff is still the same Python CLI on PyPI. For JavaScript and TypeScript projects I shipped an
+                      npm wrapper package,
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">slopsniff-cli</code>,
+                      so you get familiar ergonomics without porting the scanner: one codebase, same rules, native
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">npx</code> and
+                      devDependency flows.
+                    </p>
+                    <p>
+                      The wrapper checks for
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">uv</code>, can try
+                      to install it on macOS/Linux if it is missing, then runs
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">uv tool run --from slopsniff slopsniff …</code>.
+                      Under <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">npm/</code>
+                      you will find <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">package.json</code>,
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">bin/slopsniff.js</code>,
+                      postinstall logic that seeds
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">slopsniff.json</code>
+                      when it makes sense, templates, and package README.
+                    </p>
+                    <p>
+                      Release workflow now publishes both PyPI and npm; the npm version is synced from
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">pyproject.toml</code>
+                      so one version bump drives both. Publishing uses
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">NODE_AUTH_TOKEN</code>
+                      / <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">NPM_TOKEN</code>
+                      as a reliable token flow.
+                    </p>
+                    <p>
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">slopsniff.json</code>
+                      grew real config for everyone: fail threshold, file and function limits, include and exclude
+                      extensions, exclude dirs and files, verbose, and which rules to run, plus walker support for
+                      excluding specific files by path.
+                    </p>
+                    <p>
+                      Typical JS usage:
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">npx slopsniff-cli .</code>
+                      or
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">npm i -D slopsniff-cli</code>
+                      and npm scripts for normal vs strict CI. Same scanner, whichever ecosystem your repo lives in.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li class="blog-item" data-tags="cli ci-cd dev-tools reliability">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
