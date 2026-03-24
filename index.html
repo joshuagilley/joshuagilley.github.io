@@ -934,6 +934,70 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li class="blog-item" data-tags="cli ci-cd dev-tools reliability">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        SlopSniff Update: Catching Bug-Masking Fallbacks
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">March 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          I added a fallback-defaults rule to catch vague env and catch-block fallbacks before they
+                          turn into debugging nightmares.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >CLI</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >CI/CD</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Dev Tools</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Reliability</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      I just added a new SlopSniff fallback check after getting burned by one of those "seems safe"
+                      defaults. In my case it was an env var fallback that quietly returned a primitive and sent me down
+                      a long debugging rabbit hole because the code looked fine on first pass.
+                    </p>
+                    <p>
+                      The new rule flags patterns that tend to mask correctness bugs: primitive env defaults and
+                      catch-all blocks that return a primitive instead of preserving failure semantics or adding real
+                      observability.
+                    </p>
+                    <pre
+                      class="rounded-lg bg-zinc-900 border border-zinc-800 p-3 text-xs text-zinc-400 overflow-x-auto"
+                    ><code>class FallbackDefaultsRule:
+    rule_id = "fallback-defaults"
+
+    def run(self, file_context: FileContext) -> list[Finding]:
+        # Flags env fallbacks and catch-all primitive returns
+        # e.g. process.env.X || "" or except Exception: return None
+        ...
+</code></pre>
+                    <p>
+                      It is intentionally conservative and explainable. If a fallback is truly intentional, you can
+                      suppress it with a pragma. If not, this catches the problem early in CI instead of after hours of
+                      "why is this silently empty?" debugging.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li id="blog-slopsniff" class="blog-item scroll-mt-24" data-tags="projects cli ci-cd dev-tools">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
