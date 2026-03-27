@@ -508,7 +508,80 @@
             </div>
 
             <ul class="group/list">
-              <!-- Project: SlopSniff -->
+              <!-- Newest first -->
+              <!-- TraceLab -->
+              <li class="mb-12">
+                <div
+                  class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+                >
+                  <div
+                    class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg border border-transparent transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:border-zinc-800 lg:group-hover:bg-zinc-900/30"
+                  ></div>
+                  <div class="z-10 sm:order-2 sm:col-span-6">
+                    <h3 class="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+                      <span class="inline-flex items-baseline font-medium leading-tight text-zinc-200 text-base"
+                        >TraceLab</span
+                      >
+                      <span class="text-[11px] font-normal text-zinc-500 tabular-nums">March 2026</span>
+                    </h3>
+                    <p class="mt-2 text-sm leading-normal">
+                      A small web app for learning system design through interactive explanations: pick a topic like
+                      caching or rate limiting, read a clear write-up, see a minimal code example, and explore a
+                      visual of what the system is doing. Built as a portfolio and learning project, v1 stays light (no
+                      auth or heavy infra) and focuses on clarity and polish.
+                      <a
+                        class="text-indigo-400 hover:text-indigo-300 underline"
+                        href="https://tracelab-web-1033528334340.us-east1.run.app"
+                        rel="noopener noreferrer"
+                        >Open TraceLab</a
+                      >
+                      ·
+                      <a class="text-indigo-400 hover:text-indigo-300 underline" href="#blog-tracelab"
+                        >Intro post</a
+                      >.
+                    </p>
+                    <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          React
+                        </div>
+                      </li>
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          TypeScript
+                        </div>
+                      </li>
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          Vite
+                        </div>
+                      </li>
+                      <li class="mr-1.5 mt-2">
+                        <div
+                          class="flex items-center rounded-md bg-indigo-500/10 border border-indigo-500/10 px-3 py-1 text-xs font-medium leading-5 text-indigo-400 group-hover:border-indigo-500/20 transition-colors"
+                        >
+                          Go
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="z-10 sm:order-1 sm:col-span-2">
+                    <div
+                      class="aspect-video w-32 sm:w-full rounded border-2 border-zinc-800 bg-zinc-900 transition group-hover:border-zinc-700 sm:order-1 sm:col-span-2 sm:translate-y-1 flex items-center justify-center text-zinc-500 group-hover:text-indigo-400"
+                    >
+                      <span class="iconify" data-icon="lucide:network" data-width="24" stroke-width="1.5"></span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- SlopSniff -->
               <li class="mb-12">
                 <div
                   class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
@@ -943,6 +1016,68 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li id="blog-tracelab" class="blog-item scroll-mt-24" data-tags="projects architecture gcp react go">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        Introducing TraceLab: System Design, Explained Visually
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">March 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          A lightweight learning app: concepts like caching and rate limiting, with copy, code, and
+                          visuals. Personal project, room to grow.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Projects</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Architecture</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >React</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Go</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >GCP</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      I shipped
+                      <a
+                        class="text-indigo-400 hover:text-indigo-300 underline"
+                        href="https://tracelab-web-1033528334340.us-east1.run.app"
+                        rel="noopener noreferrer"
+                        >TraceLab</a
+                      >, a simple web app for learning system design ideas through interactive explanations. The first
+                      version is intentionally educational, not enterprise-grade: you click into a topic, get a clear
+                      explanation, a small code sample, and a visual that shows what is happening in the system.
+                    </p>
+                    <p>
+                      Stack is React, TypeScript, and Vite on the front, Go on the back. MongoDB is in the picture only if
+                      I add saved scenarios, notes, or progress later. For now there is no auth and no heavy persistence;
+                      the point is a polished, interactive feel and a codebase that stays modular enough to extend.
+                    </p>
+                    <p>
+                      It doubles as a personal learning tool and a portfolio piece. If something here helps someone else
+                      click with a concept faster, that is a win.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li class="blog-item" data-tags="projects cli ci-cd dev-tools npm node">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
