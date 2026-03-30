@@ -1078,8 +1078,8 @@
                       <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
                         <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">March 2026</p>
                         <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
-                          Locking down MongoDB Atlas for Cloud Run: subnet, router, reserved IP, NAT, deploy flags, then
-                          a tight allowlist instead of the whole internet.
+                          VPC, NAT, and a static egress IP for Atlas—then a separate twist: the API image had no system CA
+                          bundle, so TLS to Atlas failed even when networking was right.
                         </p>
                       </div>
                       <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
@@ -1131,10 +1131,31 @@
                       this path is Cloud Run through NAT to the internet, not east-west between VMs.
                     </p>
                     <p>
-                      Net: static egress, Atlas allowlist tied to that IP, and a much smaller trust surface than before.
-                      Next steps when you want more than IP rules are things like Private Service Connect or stronger auth
-                      at the data plane, but this gets you to a pattern that looks like how a lot of production systems
-                      start.
+                      Even with NAT and allowlisting correct, Mongo still would not come up cleanly. Raw TCP was fine, the
+                      egress IP matched what Atlas expected, but the Go driver never finished replica set discovery:
+                      errors along the lines of servers unknown,
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">ReplicaSetNoPrimary</code>,
+                      and context deadline exceeded. That pointed away from routing and toward TLS.
+                    </p>
+                    <p>
+                      The API container was built on
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">gcr.io/distroless/static-debian12</code>.
+                      That image is minimal on purpose, and it does not ship the system CA certificate bundle. Atlas
+                      requires TLS, and the driver needs trusted roots in the image to validate Atlas’s certificate. The
+                      fix was switching the runtime image to
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">gcr.io/distroless/base-debian12:nonroot</code>,
+                      which includes the CA store, so TLS verification succeeded and the client could complete discovery.
+                    </p>
+                    <p>
+                      So the failure that looked like “Mongo from Cloud Run is broken” had two layers: the networking and
+                      access story was still worth doing for real (static egress, tight allowlist, no wide-open IP list).
+                      The immediate root cause of the TLS handshake not completing was missing CA certificates in the
+                      distroless static image—not a bad VPC, NAT, or connection string.
+                    </p>
+                    <p>
+                      Net: keep the VPC/NAT pattern for how you present to Atlas, and treat minimal base images as a
+                      checklist item whenever you terminate TLS inside the container. Next steps when you want more than
+                      IP rules are still things like Private Service Connect or stronger auth at the data plane.
                     </p>
                   </div>
                 </details>
