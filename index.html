@@ -1028,6 +1028,74 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li class="blog-item" data-tags="architecture llm react fundamentals reliability">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        Opus, DRY, and a Hundred Components That Should Have Been One Pattern
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">March 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          I asked a top-tier model for help and got the same React component twenty different ways
+                          instead of a config-driven design. The cleanup was brutal and instructive.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Architecture</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >LLM</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >React</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Fundamentals</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      I leaned on the latest Opus-class model for a batch of React work. What came back looked fine in
+                      isolation: each file rendered, types mostly lined up, reviews could pass if you squinted. The
+                      catch was structural. It had effectively built the same component over and over, maybe twenty
+                      variations, instead of stepping back and asking what was shared. DRY was not on the menu. A human
+                      architect would have reached for props, a map, or a small schema long before the twentieth paste.
+                    </p>
+                    <p>
+                      I kept the useful bits and threw away the repetition. The real fix was boring in a good way:
+                      BSON documents in MongoDB, one config per lab, and a thin layer in the app that renders from that
+                      data. When the dust settled I had deleted on the order of a hundred components that never needed
+                      to exist as separate files. Same UX, far less surface area, one place to change behavior.
+                    </p>
+                    <p>
+                      So here we are with the best models we have ever had, and moments like this still feel like
+                      glorified autocomplete: great at local pattern completion, not really thinking or reasoning about
+                      structure across the whole tree. The model did not “decide” on an architecture; it completed the
+                      next plausible file. The abstraction was mine. That is not a knock on the tool, it is a reminder of
+                      what it is and what it is not, and why DRY and ownership still sit with the person at the keyboard.
+                    </p>
+                    <p>
+                      There is another cost that is easy to ignore: tokens. Generating twenty near-duplicate components and
+                      a follow-up refactor burns context, completions, and churn that never had to happen. Today that
+                      often hides behind a flat twenty-dollar subscription or bundled credits, so wasted work does not
+                      sting the same way. If usage were priced closer to true marginal cost and surfaced clearly, I think
+                      a lot of us would be more careful about when we reach for the model and more allergic to outputs
+                      that multiply garbage. Until then, it is worth counting that waste yourself, if only so you are not
+                      training your habits on artificially cheap thrash.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li id="blog-tracelab" class="blog-item scroll-mt-24" data-tags="projects architecture gcp react go">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
@@ -2152,21 +2220,30 @@ jobs:
                 <div class="space-y-3 text-xs">
                   <div>
                     <p class="mb-1 text-zinc-500 font-semibold flex items-center gap-1.5">
-                      <span class="text-amber-400">🟡</span> In progress
+                      <span class="text-green-400">✅</span> Earned
                     </p>
                     <div class="flex flex-wrap gap-4">
-                      <div class="flex flex-col items-center gap-1">
+                      <!-- TODO: set href to Credly badge URL when ready -->
+                      <div class="flex flex-col items-center gap-1 group max-w-[100px]">
                         <img
                           src="images/certs/mongo_db_dev.png"
                           alt="MongoDB Developer – Associate"
-                          class="w-[90px] h-[90px] object-contain rounded-lg border border-dashed border-amber-500/40 opacity-60 grayscale"
+                          class="w-[90px] h-[90px] object-contain rounded-lg border border-zinc-800 group-hover:border-indigo-500/40 transition-colors"
                           onerror="
                             this.style.display = 'none';
                             this.nextElementSibling?.classList.remove('hidden');
                           "
                         />
-                        <span class="text-[11px] font-medium text-zinc-400 text-center"
+                        <span
+                          class="hidden flex w-[90px] h-[90px] rounded-lg bg-zinc-800 border border-zinc-700 items-center justify-center text-zinc-500 text-center text-[11px]"
                           >MongoDB Developer – Associate</span
+                        >
+                        <span
+                          class="text-[11px] font-medium text-zinc-300 group-hover:text-indigo-400 transition-colors text-center leading-tight"
+                          >MongoDB Developer – Associate</span
+                        >
+                        <span class="text-[10px] text-zinc-500 text-center leading-snug"
+                          >Credly link soon</span
                         >
                       </div>
                     </div>
