@@ -973,6 +973,42 @@
               <button
                 type="button"
                 class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="mongodb"
+                role="tab"
+                aria-selected="false"
+              >
+                MongoDB
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="vpc"
+                role="tab"
+                aria-selected="false"
+              >
+                VPC
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="nat"
+                role="tab"
+                aria-selected="false"
+              >
+                Cloud NAT
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                data-tag-filter="cloud-run"
+                role="tab"
+                aria-selected="false"
+              >
+                Cloud Run
+              </button>
+              <button
+                type="button"
+                class="blog-pill rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
                 data-tag-filter="doppler"
                 role="tab"
                 aria-selected="false"
@@ -1027,6 +1063,82 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li class="blog-item" data-tags="projects gcp mongodb vpc nat cloud-run security infrastructure zero-trust">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        TraceLab: From Open Atlas IPs to VPC, NAT, and a Static Egress IP
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">March 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          Locking down MongoDB Atlas for Cloud Run: subnet, router, reserved IP, NAT, deploy flags, then
+                          a tight allowlist instead of the whole internet.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Projects</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >GCP</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >MongoDB</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >VPC</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Cloud NAT</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Cloud Run</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Security</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      Early on, TraceLab’s Atlas project had the usual development shortcut: network access wide open so
+                      anything could reach the cluster while I iterated. That is fine until it is not. I wanted the same
+                      app on managed Cloud Run to talk to Mongo with a predictable egress identity and no world-open
+                      allowlist.
+                    </p>
+                    <p>
+                      The shape of the fix is standard GCP networking: a VPC you already have, then a subnet sized for
+                      Cloud Run (a /26 in the region where the service lives), a Cloud Router, a regional static external
+                      IP, and Cloud NAT so traffic from that subnet leaves through that one address. On deploy, attach
+                      the service to the VPC and subnet and route outbound through the VPC (for example
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">--vpc-egress all-traffic</code>
+                      on <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">gcloud run deploy</code>)
+                      so database traffic does not bypass NAT. After deploy, take the reserved IP, add it in Atlas network
+                      access, wait until it is active, then remove the open-to-the-world entry. Order matters so you do not
+                      lock yourself out.
+                    </p>
+                    <p>
+                      I sanity-checked egress with a tiny “what IP do I see?” style check against a public IP echo service;
+                      it should match the NAT address. The VPC firewall prompts you sometimes see are about VM-to-VM paths;
+                      this path is Cloud Run through NAT to the internet, not east-west between VMs.
+                    </p>
+                    <p>
+                      Net: static egress, Atlas allowlist tied to that IP, and a much smaller trust surface than before.
+                      Next steps when you want more than IP rules are things like Private Service Connect or stronger auth
+                      at the data plane, but this gets you to a pattern that looks like how a lot of production systems
+                      start.
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li class="blog-item" data-tags="architecture llm react fundamentals reliability">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
