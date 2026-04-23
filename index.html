@@ -1145,6 +1145,110 @@
             </div>
 
             <ul id="blog-list" class="space-y-8">
+              <li id="blog-provider-pattern" class="blog-item scroll-mt-24" data-tags="architecture fundamentals api react reliability">
+                <details class="project-details group/blog border-b border-zinc-800 pb-8">
+                  <summary class="cursor-pointer list-none">
+                    <div class="flex flex-col gap-2">
+                      <h3
+                        class="text-base font-medium leading-tight text-zinc-200 hover:text-indigo-400 transition-colors inline-flex items-center gap-2"
+                      >
+                        <span class="project-chevron inline-block transition-transform group-open/blog:rotate-180"
+                          ><span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-height="16"></span
+                        ></span>
+                        Same product, different backends: the Provider pattern for logistics software
+                      </h3>
+                      <div class="mt-1 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <p class="pl-6 text-[11px] text-zinc-500 sm:pl-0 sm:w-24">April 14, 2026</p>
+                        <p class="pl-6 text-sm text-zinc-500 sm:pl-0 sm:flex-1">
+                          One codebase, many TMS and rating vendors—small adapters behind shared interfaces, composed
+                          per org so the rest of the app stops hunting for
+                          <code class="rounded bg-zinc-800 px-1 py-0.5 font-mono text-[11px] text-zinc-300">if (vendor === …)</code>.
+                        </p>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-1.5 pl-6 sm:pl-0">
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Architecture</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >API</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >React</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Fundamentals</span
+                        >
+                        <span class="rounded border border-zinc-700 bg-zinc-900/80 px-2 py-0.5 text-xs text-zinc-500"
+                          >Reliability</span
+                        >
+                      </div>
+                    </div>
+                  </summary>
+                  <div class="mt-4 pl-6 text-sm text-zinc-400 space-y-3 leading-relaxed">
+                    <p>
+                      Shipping software rarely talks to one system. One customer’s TMS might be 3PL Systems; another
+                      might still be on a SpeedShip-style path. Rating can come from GreenScreens, Sonar, or nothing at
+                      all for a given org. If that complexity leaks everywhere, every new integration becomes “find every
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">if (vendor === …)</code>
+                      and hope you didn’t miss one.”
+                    </p>
+                    <p>
+                      In our codebase we pushed that mess behind a Provider design: small adapters that implement the same
+                      interfaces, assembled by a factory into a registry the rest of the app can treat as “the
+                      integrations for this organization.”
+                    </p>
+                    <p class="font-medium text-zinc-300">The problem</p>
+                    <p>
+                      TMS and rating aren’t single implementations—they’re families of behaviors: quote, book, normalize
+                      payloads, tell the UI what’s supported. Duplicating vendor logic across controllers and React
+                      components doesn’t scale, and it makes the frontend impossible to keep honest. Questions like “does
+                      this org support documents?” shouldn’t depend on reading someone’s credential JSON in three places.
+                    </p>
+                    <p class="font-medium text-zinc-300">What we built</p>
+                    <p>
+                      On the server, integrations live under
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">providers/</code>:
+                      TMS adapters and rating-engine adapters, plus shared pieces like
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">ProviderFactory</code>
+                      and
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">ProviderRegistry</code>.
+                      Interfaces such as
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">TmsProvider</code>
+                      and
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">RatingEngineProvider</code>
+                      define what “a TMS” or “a rating engine” means in our domain—what you can call, what metadata you
+                      expose—not how GreenScreens vs Sonar shapes JSON. Concrete providers (3PL TMS, mock/SpeedShip-style
+                      paths, GreenScreens, Sonar) own HTTP, auth quirks, and mapping to internal shapes.
+                    </p>
+                    <p>
+                      The factory looks at the resolved organization—credentials, API provider flags—and builds the
+                      right instances. The registry holds this org’s TMS (if any) and a map of rating engines by id, with
+                      clear errors when something isn’t configured. We keep guardrails: providers stay adapters (no Mongo,
+                      no “business policy” soup) so orchestration stays in services, the graph stays testable, and factory
+                      and registry tests spell out which org shapes yield which provider.
+                    </p>
+                    <p class="font-medium text-zinc-300">Why the frontend stays cleaner</p>
+                    <p>
+                      The UI doesn’t import vendor-specific classes or know Sonar’s field names. It consumes a stable
+                      summary—things like
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">providerSetup</code>
+                      and TMS capabilities on the email payload—derived from the registry. That’s “which integrations
+                      exist and what can they do?” as data, not as a tangle of imports. Backend code talks to
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">TmsProvider</code>
+                      and
+                      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300 font-mono text-xs">RatingEngineProvider</code>;
+                      frontend code talks to capabilities and ids.
+                    </p>
+                    <p class="font-medium text-zinc-300">Takeaway</p>
+                    <p>
+                      Multiple TMS and rating implementations are manageable if you treat them as pluggable providers
+                      behind shared interfaces, composed per org at the edge, and surfaced to clients as a small,
+                      intentional API. Keep adapters thin, keep the factory boring, and let the registry be the single
+                      place that answers “what does this customer actually have wired up?”
+                    </p>
+                  </div>
+                </details>
+              </li>
               <li class="blog-item" data-tags="projects gcp mongodb vpc nat cloud-run security infrastructure zero-trust">
                 <details class="project-details group/blog border-b border-zinc-800 pb-8">
                   <summary class="cursor-pointer list-none">
@@ -2442,8 +2546,12 @@ jobs:
                       <span class="text-green-400">✅</span> Earned
                     </p>
                     <div class="flex flex-wrap gap-4">
-                      <!-- TODO: set href to Credly badge URL when ready -->
-                      <div class="flex flex-col items-center gap-1 group max-w-[100px]">
+                      <a
+                        href="https://www.credly.com/badges/5b22dbdb-0bc4-4be9-82f3-d41a3e06a796/public_url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-1 group"
+                      >
                         <img
                           src="images/certs/mongo_db_dev.png"
                           alt="MongoDB Developer – Associate"
@@ -2461,10 +2569,7 @@ jobs:
                           class="text-[11px] font-medium text-zinc-300 group-hover:text-indigo-400 transition-colors text-center leading-tight"
                           >MongoDB Developer – Associate</span
                         >
-                        <span class="text-[10px] text-zinc-500 text-center leading-snug"
-                          >Credly link soon</span
-                        >
-                      </div>
+                      </a>
                     </div>
                   </div>
                 </div>
